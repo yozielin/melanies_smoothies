@@ -1,4 +1,6 @@
 # Import python packages
+
+import requests
 import streamlit as st
 # from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col
@@ -7,7 +9,8 @@ from snowflake.snowpark.functions import col
 st.title(":cup_with_straw: Customize Your Smoothie :cup_with_straw:")
 st.write("Replace the code in this example app with your own code! And if you're new to Streamlit, here are some helpful links:")
 
-
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
 
 cnx = st.connection("snowflake")
 session = cnx.session()
@@ -15,6 +18,8 @@ session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
 
 name_on_order = st.text_input("Name on Smothie: ")
 st.write("The name on your Smothie will be: ", name_on_order)
