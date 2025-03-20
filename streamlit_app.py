@@ -10,7 +10,7 @@ st.title(":cup_with_straw: Customize Your Smoothie :cup_with_straw:")
 st.write("Replace the code in this example app with your own code! And if you're new to Streamlit, here are some helpful links:")
 
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response)
+
 
 cnx = st.connection("snowflake")
 session = cnx.session()
@@ -51,3 +51,5 @@ if ingridients_list:
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered, ' + name_on_order + '!' , icon="✅")
+
+st.text(smoothiefroot_response.json)
